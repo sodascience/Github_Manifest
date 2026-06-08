@@ -22,7 +22,7 @@ This document defines the standards, workflows, and expectations for all reposit
 
 ### Non-negotiable defaults for every repository
 
-- **No secrets in git** — use GitHub Secrets for CI, `.env` files locally (never committed)
+- **No secrets in git** — Secrets can be anything from API keys to passwords. Use Github secrets or `.env` files locally (never committed) 
 - **No large or sensitive data in git** — document how to obtain data in `data/README.md`
 - **Branch protection on `main`** — direct pushes are never allowed; all changes go via PR
 - **Default branch is `main`** — not `master`
@@ -41,7 +41,7 @@ my-package/
 │   ├── workflows/
 │   │   ├── ci.yml              # Lint + test on every PR
 │   │   └── release.yml         # Publish to PyPI on tag
-│   ├── ISSUE_TEMPLATE/
+│   ├── ISSUE_TEMPLATE/         # Optional
 │   │   ├── bug_report.md
 │   │   └── feature_request.md
 │   └── pull_request_template.md
@@ -53,6 +53,7 @@ my-package/
 ├── README.md
 └── pyproject.toml
 ```
+TODO: INSTRUCTION TO CREATE DIFFERENT TYPES OF PROJECT
 
 ### Research / Analysis Project
 
@@ -187,21 +188,22 @@ changes to parser
 - Imperative mood: "add feature" — not "added" or "adds"
 - Concise header ≤ 72 characters
 - One logical change per commit — atomic commits simplify reverting and `git bisect` (command that helps finding a bug in a commit history)
-- Reference issues in footer: `Closes #42`
+- Reference issues in footer: `Closes #42` where relevant
 
 ---
 
 ## 5. Pull Requests & Code Review
 
+
+
 ### PR expectations
 
 - PRs are required for all changes to `main` (and `develop` in GitFlow)
-- **No self-merging** — every PR needs at least one reviewer who is not the author
-- **Draft PRs** are encouraged for early feedback on direction before a feature is complete
+- **No self-merging** — every PR needs at least one reviewer who is not the author for collaborations. This not necessarily required for smaller projects.
 
 ### PR title
 
-Follows Conventional Commits format — the squash-merge commit message is derived from it:
+Follows Conventional Commits format:
 
 ```
 feat(synthesis): add Gaussian copula for multivariate synthesis
@@ -246,7 +248,7 @@ labels: bug
 
 ## Expected vs actual behavior
 
-## How was the bug encountered (please include screenshots or code where possible)
+## How to reproduce the bug (please include screenshots or code where possible)
 
 ## Environment
 - OS:
