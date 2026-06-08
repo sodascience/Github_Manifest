@@ -244,14 +244,9 @@ about: Report unexpected behavior
 labels: bug
 ---
 
-## Describe the bug
-
-## Minimal reproduction
-\`\`\`python
-# Code that reproduces the issue
-\`\`\`
-
 ## Expected vs actual behavior
+
+## How was the bug encountered (please include screenshots or code where possible)
 
 ## Environment
 - OS:
@@ -259,20 +254,6 @@ labels: bug
 - Package version:
 ```
 
-**`feature_request.md`:**
-```markdown
----
-name: Feature request
-about: Suggest a new feature or improvement
-labels: enhancement
----
-
-## Problem this solves
-
-## Proposed solution
-
-## Alternatives considered
-```
 
 ### Issue lifecycle
 
