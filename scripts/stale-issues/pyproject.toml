@@ -5,5 +5,6 @@ description = "Sripts for monitoring and maintainance of the project"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "PyGithub>=2.9.1"
+    "PyGithub>=2.9.1",
+    "pyyaml>=6.0.3",
 ]
