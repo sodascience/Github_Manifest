@@ -1,4 +1,4 @@
-name: Stale Issue Reminder
+name: Inactive Issue Checker
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-stale-issues:
+  check-inactive-issues:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,8 +21,8 @@ jobs:
       - name: Sync dependencies
         run: uv sync
 
-      - name: Run stale issue checker
+      - name: Run inactive-issue-checker
         env:
           ORG_NAME: ${{ secrets.ORG_NAME }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: uv run scripts/stale-issues/check_stale_issues.py
+        run: uv run scripts/inactive-issues/check_inactive_issues.py
