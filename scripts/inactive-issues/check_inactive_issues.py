@@ -19,10 +19,10 @@ REPORT_TEMPLATE     = SCRIPT_RELATIVE_DIR / config["paths"]["report_markdown_tem
 LOG_FILE_PATH       = SCRIPT_RELATIVE_DIR / 'logs.json'
 NEW_REPORT_DIR      = SCRIPT_RELATIVE_DIR / 'reports'
 
+COMMENT_BODY        = config["comment_body"].replace("%amount_of_days%", str(INACTIVE_AFTER_DAYS))
 DATETIME_NOW        = datetime.now(UTC)
 CURRENT_DATE_STR    = DATETIME_NOW.strftime("%Y-%m-%d")
 CUTOFF_DATETIME     = DATETIME_NOW - timedelta(days=INACTIVE_AFTER_DAYS)
-COMMENT_BODY        = config["comment_body"]
 
 if not GITHUB_TOKEN or not ORGANIZATION_NAME:
     print("::error::Please make sure the GITHUB_TOKEN and ORGANIZATION_NAME environment variables are defined.")
@@ -71,8 +71,7 @@ def create_markdown_report():
         issue_link = f"[{i.title}]({i.html_url})" if i.html_url is not None else "Unknown Issue Link"
         inactive_since = i.updated_at.strftime("%Y-%m-%d") if i.updated_at is not None else "Unknown Last Updated Date"
         assignees_str = get_assignees_string(i)
-        repo_owner = i.repository.owner.login if i.repository.owner is not None else "Unknown Repo Owner"
-        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {repo_owner} |")
+        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} |")
 
     issues_table_rows = "\n".join(issues_table_rows)
 
@@ -120,7 +119,8 @@ for repo in organization.get_repos():
         inactive_issues.append(issue)
 
         if CREATE_COMMENTS and len(issue.assignees) > 0:
-           issue.create_comment(COMMENT_BODY) 
+           issue.create_comment(COMMENT_BODY)
+           
 
 update_issues_log_file()
 create_markdown_report()
