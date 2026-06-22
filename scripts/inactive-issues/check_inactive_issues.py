@@ -4,7 +4,9 @@ import json
 from pathlib import Path
 from github import Auth, Github
 from github.Issue import Issue
+from github.Repository import Repository
 import yaml
+import re
 
 SCRIPT_RELATIVE_DIR = Path(__file__).parent
 
@@ -33,6 +35,23 @@ organization    = github.get_organization(ORGANIZATION_NAME)
 log_file        = Path(LOG_FILE_PATH)
 logged_issues_by_url :dict          = json.loads(log_file.read_text()) if log_file.exists() else {}
 inactive_issues      :list[Issue]   = []
+
+def get_contact_person(repo: Repository) -> str:
+    """
+    Extracts names from links that appear after the last word "contact" in a repository's README file.
+    Returns the contact person's name(s) if found, otherwise "Not found".
+    """
+    try:
+        content = repo.get_readme().decoded_content.decode("utf-8")
+        last_contact_position = content.lower().rfind("contact")
+        if last_contact_position == -1:
+            return "Not found"
+        links = re.findall(r'\[([^\]]+)\]\((https?://[^\)]+)\)', content[last_contact_position:])
+        if links:
+            return ", ".join(name.replace("\n", " ").strip() for name, url in links)
+    except Exception:
+        pass
+    return "Not found"
 
 def get_assignees_string(issue: Issue) -> str:
     return ", ".join(a.login for a in issue.assignees) if len(issue.assignees) > 0 else "Empty"
@@ -71,7 +90,8 @@ def create_markdown_report():
         issue_link = f"[{i.title}]({i.html_url})" if i.html_url is not None else "Unknown Issue Link"
         inactive_since = i.updated_at.strftime("%Y-%m-%d") if i.updated_at is not None else "Unknown Last Updated Date"
         assignees_str = get_assignees_string(i)
-        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} |")
+        owner_name    = get_contact_person(i.repository)
+        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {owner_name} |")
 
     issues_table_rows = "\n".join(issues_table_rows)
 
