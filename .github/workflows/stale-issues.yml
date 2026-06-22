@@ -19,10 +19,12 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Sync dependencies
+        working-directory: scripts/inactive-issues
         run: uv sync
 
       - name: Run inactive-issue-checker
+        working-directory: scripts/inactive-issues
         env:
           ORG_NAME: "sodascience"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: uv run scripts/inactive-issues/check_inactive_issues.py
+        run: uv run check_inactive_issues.py
