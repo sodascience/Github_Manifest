@@ -9,12 +9,12 @@ import yaml
 SCRIPT_RELATIVE_DIR = Path(__file__).parent
 
 with open(SCRIPT_RELATIVE_DIR / "config.yml", "r") as f:
-    config = yaml.safe_load(f)
+    config = yaml.safe_load(f) or {}
 
-GITHUB_TOKEN        = os.environ.get("GH_TOKEN") 
+GITHUB_TOKEN        = os.environ.get("GITHUB_TOKEN") 
 ORGANIZATION_NAME   = os.environ.get("ORG_NAME") 
-INACTIVE_AFTER_DAYS = config["issue_inactivity_threshold_days"]
-CREATE_COMMENTS     = config["create_comments"]
+INACTIVE_AFTER_DAYS = config.get("issue_inactivity_threshold_days", 180)
+CREATE_COMMENTS     = config.get("create_comments", False)
 REPORT_TEMPLATE     = SCRIPT_RELATIVE_DIR / config["paths"]["report_markdown_template"]
 LOG_FILE_PATH       = SCRIPT_RELATIVE_DIR / config["paths"]["log_file"]
 NEW_REPORT_DIR      = SCRIPT_RELATIVE_DIR / "reports"
@@ -71,7 +71,8 @@ def create_markdown_report():
         issue_link = f"[{i.title}]({i.html_url})" if i.html_url is not None else "Unknown Issue Link"
         inactive_since = i.updated_at.strftime("%Y-%m-%d") if i.updated_at is not None else "Unknown Last Updated Date"
         assignees_str = get_assignees_string(i)
-        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} |")
+        repo_owner = i.repository.owner.login if i.repository.owner is not None else "Unknown Repo Owner"
+        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {repo_owner} |")
 
     issues_table_rows = "\n".join(issues_table_rows)
 

@@ -9,7 +9,7 @@ jobs:
   check-inactive-issues:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      issues: write
 
     steps:
       - name: Checkout
@@ -23,6 +23,6 @@ jobs:
 
       - name: Run inactive-issue-checker
         env:
-          ORG_NAME: ${{ secrets.ORG_NAME }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          ORG_NAME: "sodascience"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: uv run scripts/inactive-issues/check_inactive_issues.py
