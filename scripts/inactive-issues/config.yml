@@ -5,6 +5,4 @@ comment_body: "This issue has been inactive for 180 days. Please consider updati
 
 paths:
   report_markdown_template: INACTIVE_ISSUES_REPORT_TEMPLATE.md
-  log_file: logs.json
-  report_dir: reports
 ...

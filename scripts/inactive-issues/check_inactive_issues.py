@@ -16,8 +16,8 @@ ORGANIZATION_NAME   = os.environ.get("ORG_NAME")
 INACTIVE_AFTER_DAYS = config.get("issue_inactivity_threshold_days", 180)
 CREATE_COMMENTS     = config.get("create_comments", False)
 REPORT_TEMPLATE     = SCRIPT_RELATIVE_DIR / config["paths"]["report_markdown_template"]
-LOG_FILE_PATH       = SCRIPT_RELATIVE_DIR / config["paths"]["log_file"]
-NEW_REPORT_DIR      = SCRIPT_RELATIVE_DIR / "reports"
+LOG_FILE_PATH       = SCRIPT_RELATIVE_DIR / 'logs.json'
+NEW_REPORT_DIR      = SCRIPT_RELATIVE_DIR / 'reports'
 
 DATETIME_NOW        = datetime.now(UTC)
 CURRENT_DATE_STR    = DATETIME_NOW.strftime("%Y-%m-%d")
