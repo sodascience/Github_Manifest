@@ -48,7 +48,7 @@ def get_contact_person(repo: Repository) -> str:
             return "Not found"
         links = re.findall(r'\[([^\]]+)\]\((https?://[^\)]+)\)', content[last_contact_position:])
         if links:
-            return ", ".join(name.replace("\n", " ").strip() for name, url in links)
+            return ", ".join(f"[{name.replace(chr(10), ' ').strip()}]({url})" for name, url in links)
     except Exception:
         pass
     return "Not found"
