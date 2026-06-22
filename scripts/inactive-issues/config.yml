@@ -1,0 +1,8 @@
+---
+create_comments: false # no write operations will be performed, only debug output will be printed and the report will be generated
+issue_inactivity_threshold_days: 180
+comment_body: "This issue has been inactive for %amount_of_days% days. Please consider updating it or closing if not relevant anymore."
+
+paths:
+  report_markdown_template: INACTIVE_ISSUES_REPORT_TEMPLATE.md
+...
