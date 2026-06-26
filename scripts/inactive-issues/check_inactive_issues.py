@@ -59,8 +59,8 @@ def get_contact_person(repo: Repository) -> str:
 
         if contact_persons:
             return ", ".join(contact_persons)
-    except Exception:
-        pass
+    except Exception as e:
+        return f"Failed to read contact: {e}"
     return "Not found"
 
 def get_assignees_string(issue: Issue) -> str:
