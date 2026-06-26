@@ -42,11 +42,11 @@ def get_contact_person(repo: Repository) -> str:
     from the Contact section of the readme.
     Returns "Not found" if no contacts are found for a repo.
     """
-    try:
-        content = repo.get_readme().decoded_content.decode("utf-8")
-        last_contact_position = content.lower().rfind("contact")
-        if last_contact_position == -1:
-            return "Not found"
+    content = repo.get_readme().decoded_content.decode("utf-8")
+    last_contact_position = content.lower().rfind("contact")
+    if last_contact_position == -1:
+        return "Contact section not found"
+
         contact_content = content[last_contact_position:]
         contact_link_regexp = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
         contact_email_regexp = r'\[[^\]]+\]\(mailto:([^\)]+)\)'
@@ -59,9 +59,10 @@ def get_contact_person(repo: Repository) -> str:
 
         if contact_persons:
             return ", ".join(contact_persons)
-    except Exception as e:
-        return f"Failed to read contact: {e}"
-    return "Not found"
+    
+    # Edge case when contact section exists but no contacts detected by the regex,
+    # might have information about institution collaboration (e.g. websweep: https://github.com/sodascience/websweep)
+    return "Contact person not found" 
 
 def get_assignees_string(issue: Issue) -> str:
     return ", ".join(a.login for a in issue.assignees) if len(issue.assignees) > 0 else "Empty"
