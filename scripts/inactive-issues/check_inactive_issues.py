@@ -38,17 +38,27 @@ inactive_issues      :list[Issue]   = []
 
 def get_contact_person(repo: Repository) -> str:
     """
-    Extracts names from links that appear after the last word "contact" in a repository's README file.
-    Returns the contact person's name(s) if found, otherwise "Not found".
+    For the given repository, extracts 2 types of contacts, names linked to github profiles or email adresses
+    from the Contact section of the readme.
+    Returns "Not found" if no contacts are found for a repo.
     """
     try:
         content = repo.get_readme().decoded_content.decode("utf-8")
         last_contact_position = content.lower().rfind("contact")
         if last_contact_position == -1:
             return "Not found"
-        links = re.findall(r'\[([^\]]+)\]\((https?://[^\)]+)\)', content[last_contact_position:])
-        if links:
-            return ", ".join(f"[{name.replace(chr(10), ' ').strip()}]({url})" for name, url in links)
+        contact_content = content[last_contact_position:]
+        contact_link_regexp = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
+        contact_email_regexp = r'\[[^\]]+\]\(mailto:([^\)]+)\)'
+
+        links = re.findall(contact_link_regexp, contact_content)
+        emails = re.findall(contact_email_regexp, contact_content)
+        
+        links_strings = [f"[{name.replace(chr(10), ' ').strip()}]({url})" for name, url in links]
+        contact_persons = links_strings + emails
+
+        if contact_persons:
+            return ", ".join(contact_persons)
     except Exception:
         pass
     return "Not found"
@@ -91,7 +101,8 @@ def create_markdown_report():
         inactive_since = i.updated_at.strftime("%Y-%m-%d") if i.updated_at is not None else "Unknown Last Updated Date"
         assignees_str = get_assignees_string(i)
         owner_name    = get_contact_person(i.repository)
-        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {owner_name} |")
+        repository_contributors = ", ".join([f"[{c.login}]({c.html_url})" for c in i.repository.get_contributors()])
+        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {owner_name} | {repository_contributors} |")
 
     issues_table_rows = "\n".join(issues_table_rows)
 
