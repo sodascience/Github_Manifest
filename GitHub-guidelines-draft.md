@@ -53,7 +53,6 @@ my-package/
 ├── README.md
 └── pyproject.toml
 ```
-TODO: INSTRUCTION TO CREATE DIFFERENT TYPES OF PROJECT
 
 ### Research / Analysis Project
 
@@ -77,6 +76,8 @@ my-research-project/
 ```
 
 ---
+
+NOTE: For this type of project we have a template which can be used to make the setup a bit easier. It can be found [here](https://github.com/sodascience/research-project-boilerplate).
 
 ## 3. Branching Strategy
 
@@ -269,9 +270,9 @@ Periodically (every few months) review all open issues and close those that are 
 
 ### Tests
 
-TODO: Expand this section.
+When developing a tool that others will hopefully use someday it is important to make sure it works as intended. Therefore testing your code to verify this is the case is very useful. It has the additional benefit of being an automatic check whether or not a new change breaks some existing core functionality.
 
-It is important for all new repositories to have tests that are executed by CI and test the functionality of the code every time there is a PR to the 'main' branch. 
+Thus, it is important for all new repositories to have tests that are executed by CI and test the functionality of the code every time there is a PR to the 'main' branch wherever reasonable. If the project is mostly data analysis or is not intended to be reusable this may not apply. This is however a case of author discretion.
 
 Structure of the `tests` directory:
 
