@@ -268,6 +268,8 @@ Periodically (every few months) review all open issues and close those that are 
 
 ## 7. Recommendations for new repositories
 
+### Topics
+When on the homepage of your repository you can click on the settings icon in the about section to add topics to a repository. This is useful as people can easily find out what your project is about. For example if you are using an LLM to analyze CBS data in Python you would use the "cbs" "llm" and "python" tags. Please add these as it makes the purpose of a repository much more clear. Standard convention here is to use lowercase and only to use abbreviations when the abbreviation is generally used more than the full version.
 ### Tests
 
 When developing a tool that others will hopefully use someday it is important to make sure it works as intended. Therefore testing your code to verify this is the case is very useful. It has the additional benefit of being an automatic check whether or not a new change breaks some existing core functionality.
