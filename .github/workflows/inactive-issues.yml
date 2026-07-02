@@ -1,0 +1,39 @@
+name: Inactive Issue Checker
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # every Monday at 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-inactive-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync dependencies
+        working-directory: scripts/inactive-issues
+        run: uv sync
+
+      - name: Run inactive-issue-checker
+        working-directory: scripts/inactive-issues
+        env:
+          ORG_NAME: "sodascience"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: uv run check_inactive_issues.py
+
+      - name: Commit log and report back to repo # commits to the branch that triggered the workflow
+        run: |
+          git config user.name "github-actions[🤖🔎]"
+          git config user.email "github-actions[🤖🔎]@users.noreply.github.com"
+          git add scripts/inactive-issues/logs.json scripts/inactive-issues/reports/
+          git diff --staged --quiet || git commit -m "chore: inactive issues report $(date -u +%Y-%m-%d)"
+          git push

@@ -4,7 +4,9 @@ import json
 from pathlib import Path
 from github import Auth, Github
 from github.Issue import Issue
+from github.Repository import Repository
 import yaml
+import re
 
 SCRIPT_RELATIVE_DIR = Path(__file__).parent
 
@@ -16,13 +18,13 @@ ORGANIZATION_NAME   = os.environ.get("ORG_NAME")
 INACTIVE_AFTER_DAYS = config.get("issue_inactivity_threshold_days", 180)
 CREATE_COMMENTS     = config.get("create_comments", False)
 REPORT_TEMPLATE     = SCRIPT_RELATIVE_DIR / config["paths"]["report_markdown_template"]
-LOG_FILE_PATH       = SCRIPT_RELATIVE_DIR / config["paths"]["log_file"]
-NEW_REPORT_DIR      = SCRIPT_RELATIVE_DIR / "reports"
+LOG_FILE_PATH       = SCRIPT_RELATIVE_DIR / 'logs.json'
+NEW_REPORT_DIR      = SCRIPT_RELATIVE_DIR / 'reports'
 
+COMMENT_BODY        = config["comment_body"].replace("%amount_of_days%", str(INACTIVE_AFTER_DAYS))
 DATETIME_NOW        = datetime.now(UTC)
 CURRENT_DATE_STR    = DATETIME_NOW.strftime("%Y-%m-%d")
 CUTOFF_DATETIME     = DATETIME_NOW - timedelta(days=INACTIVE_AFTER_DAYS)
-COMMENT_BODY        = config["comment_body"]
 
 if not GITHUB_TOKEN or not ORGANIZATION_NAME:
     print("::error::Please make sure the GITHUB_TOKEN and ORGANIZATION_NAME environment variables are defined.")
@@ -33,6 +35,34 @@ organization    = github.get_organization(ORGANIZATION_NAME)
 log_file        = Path(LOG_FILE_PATH)
 logged_issues_by_url :dict          = json.loads(log_file.read_text()) if log_file.exists() else {}
 inactive_issues      :list[Issue]   = []
+
+def get_contact_person(repo: Repository) -> str:
+    """
+    For the given repository, extracts 2 types of contacts, names linked to github profiles or email adresses
+    from the Contact section of the readme.
+    Returns "Not found" if no contacts are found for a repo.
+    """
+    content = repo.get_readme().decoded_content.decode("utf-8")
+    last_contact_position = content.lower().rfind("contact")
+    if last_contact_position == -1:
+        return "Contact section not found"
+
+        contact_content = content[last_contact_position:]
+        contact_link_regexp = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
+        contact_email_regexp = r'\[[^\]]+\]\(mailto:([^\)]+)\)'
+
+        links = re.findall(contact_link_regexp, contact_content)
+        emails = re.findall(contact_email_regexp, contact_content)
+        
+        links_strings = [f"[{name.replace(chr(10), ' ').strip()}]({url})" for name, url in links]
+        contact_persons = links_strings + emails
+
+        if contact_persons:
+            return ", ".join(contact_persons)
+    
+    # Edge case when contact section exists but no contacts detected by the regex,
+    # might have information about institution collaboration (e.g. websweep: https://github.com/sodascience/websweep)
+    return "Contact person not found" 
 
 def get_assignees_string(issue: Issue) -> str:
     return ", ".join(a.login for a in issue.assignees) if len(issue.assignees) > 0 else "Empty"
@@ -71,8 +101,9 @@ def create_markdown_report():
         issue_link = f"[{i.title}]({i.html_url})" if i.html_url is not None else "Unknown Issue Link"
         inactive_since = i.updated_at.strftime("%Y-%m-%d") if i.updated_at is not None else "Unknown Last Updated Date"
         assignees_str = get_assignees_string(i)
-        repo_owner = i.repository.owner.login if i.repository.owner is not None else "Unknown Repo Owner"
-        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {repo_owner} |")
+        owner_name    = get_contact_person(i.repository)
+        repository_contributors = ", ".join([f"[{c.login}]({c.html_url})" for c in i.repository.get_contributors()])
+        issues_table_rows.append(f"| {issue_link} | {repo_link} | {inactive_since} | {assignees_str} | {owner_name} | {repository_contributors} |")
 
     issues_table_rows = "\n".join(issues_table_rows)
 
@@ -120,7 +151,8 @@ for repo in organization.get_repos():
         inactive_issues.append(issue)
 
         if CREATE_COMMENTS and len(issue.assignees) > 0:
-           issue.create_comment(COMMENT_BODY) 
+           issue.create_comment(COMMENT_BODY)
+           
 
 update_issues_log_file()
 create_markdown_report()
