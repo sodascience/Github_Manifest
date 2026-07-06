@@ -1,6 +1,6 @@
 ## 1. Downloading git
 
-Git is the application that powers services such as Github and Gitlab. For the rest of this tutorial you will need to have a working installation of git which can be downloaded [here](https://git-scm.com/). If you have downloaded and installed this we can get started. Do quickly verify whether git was installed correctly by typing `git --version` in the _command line interface_ (CLI) of your operating system. For MacOS, this would be terminal; for Windows, it's called command prompt. Then, press the Enter key on your keyboard.
+Git is the application that powers services such as Github and Gitlab. It is essential for sharing and storing code. For the rest of this tutorial you will need to have a working installation of git which can be downloaded [here](https://git-scm.com/). If you have downloaded and installed this we can get started. Do quickly verify whether git was installed correctly by typing `git --version` in the _command line interface_ (CLI) of your operating system. For MacOS, this would be terminal; for Windows, it's called command prompt. Then, press the Enter key on your keyboard. If Git was installed correctly you should get a response like "Git version 2.49.0"
 
 
 ## 2. Downloading Github Desktop
