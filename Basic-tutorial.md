@@ -11,7 +11,9 @@ It is of course also possible to use the more traditional command-line interface
 
 ## 3. Creating a new repository
 
-Code is stored in what's called a repository. It is important to note here that you will have a local repository and a remote repository. The remote one is the one that is published on Github and the local one only exists on your device. If you have many changes to the project on your device these are now part of your local repository and by "pushing" these to the remote repository you can share these with other collaborators. If on the other hand someone else has made changes to the project and published these you can "pull" these changes so that your local repository reflects the published version. When you're starting a new project there are a couple of options
+Your research project, including code, data and documentation, is stored in what's called a repository. It is important to note here that you will have a local repository and a remote repository. The remote one is the one that is hosted on Github and the local one only exists on your device. If you have made any changes to the project  on your device, these are now part of your local repository and by "pushing" these to the remote repository, you can update the remote repository. This way, you can share your repository with other collaborators, allowing them to not only view but also contribute to your repository. Once a collaborator has made changes to the shared project and "pushed" these from their local version of the repository, you can review, comment on, accept/reject them, and even ask for revisions. If you are happy with these changes, you can "merge" them into the remote shared repository. Then, you can "pull" these changes so that your local repository reflects the up-to-date version. 
+
+When you're starting a new project, there are a couple of scenarios:
 1. You are starting a new project and there is no existing code yet.
 2. Somebody else has started the project already and published it to Github.
 3. You have started the project on your device but haven't published it to Github.
