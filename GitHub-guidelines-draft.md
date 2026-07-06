@@ -77,7 +77,7 @@ my-research-project/
 
 ---
 
-NOTE: For this type of project we have a template which can be used to make the setup a bit easier. It can be found [here](https://github.com/sodascience/research-project-boilerplate).
+NOTE: For this type of project we have a template which follows the recommended project structure and makes the setup a bit easier. It can be found [here](https://github.com/sodascience/research-project-boilerplate).
 
 ## 3. Branching Strategy
 
