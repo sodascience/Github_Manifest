@@ -7,6 +7,8 @@ Git is the application that powers services such as Github and Gitlab. For the r
 
 This application provides a nice visual interface for interacting with Github. It is highly recommended for beginners as it means you don't have to use the command line. It can be downloaded [here](https://desktop.github.com/download/). After it's downloaded it's important that you authenticate yourself. This can be done by going into settings, then accounts, and then signing into Github.
 
+It is of course also possible to use the more traditional command-line interface. We recommend a visual interface for people who are unfamiliar with Git and just starting out. Should you nonetheless want to use CLI instead we recommend the following resource: [Git CLI tutorial](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line)
+
 ## 3. Creating a new repository
 
 Code is stored in what's called a repository. It is important to note here that you will have a local repository and a remote repository. The remote one is the one that is published on Github and the local one only exists on your device. If you have many changes to the project on your device these are now part of your local repository and by "pushing" these to the remote repository you can share these with other collaborators. If on the other hand someone else has made changes to the project and published these you can "pull" these changes so that your local repository reflects the published version. When you're starting a new project there are a couple of options
