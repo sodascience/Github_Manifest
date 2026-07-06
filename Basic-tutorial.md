@@ -15,14 +15,16 @@ Your research project, including code, data and documentation, is stored in what
 
 When you're starting a new project, there are a couple of scenarios:
 1. You are starting a new and blank project.
-2. Somebody else has started the project already and published it to Github.
-3. You have started the project on your device but haven't published it to Github.
+2. Somebody else has started the project already and pushed it to Github.
+3. You have started the project on your device but haven't pushed it to Github.
 
 This is how to proceed depending on the scenario
 
 1. In this case you can simply click "New Repository" in Github Desktop.
 2. In this case you have to "clone" that repository. This just means setting up the local repository based on the remote repository. If you go to the homepage of that repository on Github there should be a green button which displays a link when clicked. You should copy this link. Then you can go to Github desktop and click clone repository and paste the link. After that Github Desktop takes care of the rest of the setup.
 3. In this case you can click on "Add Local Repository" after which you will have to select the folder containing your current version of the project. If this already happened to contain a .git file the rest happens automatically, if it didn't you simply click "create a repository here instead"
+
+NOTE: Pushing to github does not necessarily publish your code so that it is visible for everyone to see. You can set your repository to private if you want to have control over who sees your code/data.
 
 ## 4. Making changes
 When making changes it is important to understand two concepts, commits and branches. Let's say you have made a certain change to some code. The project is now different. What you then do is save the new version of the project by "committing" it. You can see the changes in Github Desktop and see the commit button down below with the option to add message to the new version. Once committed it is saved. You can then also "push" it so the new version is available for possible collaborators on Github. Branches much like those attached to a tree can run in parallel. Here that means that you keep multiple versions (branches) of the same project which you can edit separately. When working with other people you can each work on your own version (branch) of the project without interfering with each other's work. You can also recombine these branches if you want to merge the separate changes you and your collaborator made. You can create a new branch by clicking on "current branch" and then clicking "new branch".
