@@ -5,7 +5,7 @@ Git is the application that powers services such as Github and Gitlab. It is ess
 
 ## 2. Downloading Github Desktop
 
-This application provides a nice visual interface for interacting with Github. It is highly recommended for beginners as it means you don't have to use the command line. It can be downloaded [here](https://desktop.github.com/download/). After it's downloaded it's important that you authenticate yourself. This can be done by going into settings, then accounts, and then signing into Github.
+This application provides a nice visual interface for interacting with Github. It is highly recommended for beginners as it means you don't have to use the command line. It can be downloaded [here](https://desktop.github.com/download/). After installation it is important that you authenticate yourself. This can be done by going into settings, then accounts, and then signing into Github. If you do not have a github account yet please create one.
 
 It is of course also possible to use the more traditional command-line interface. We recommend a visual interface for people who are unfamiliar with Git and just starting out. Should you nonetheless want to use CLI instead we recommend the following resource: [Git CLI tutorial](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line)
 
