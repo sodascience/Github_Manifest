@@ -30,10 +30,19 @@ if not GITHUB_TOKEN or not ORGANIZATION_NAME:
     print("::error::Please make sure the GITHUB_TOKEN and ORGANIZATION_NAME environment variables are defined.")
     exit(1)  
 
+def load_logged_issues(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text())
+    except json.JSONDecodeError:
+        print(f"::warning::{path} is empty or invalid JSON, starting with an empty log.")
+        return {}
+
 github          = Github(auth=Auth.Token(GITHUB_TOKEN))
 organization    = github.get_organization(ORGANIZATION_NAME)
 log_file        = Path(LOG_FILE_PATH)
-logged_issues_by_url :dict          = json.loads(log_file.read_text()) if log_file.exists() else {}
+logged_issues_by_url :dict          = load_logged_issues(log_file)
 inactive_issues      :list[Issue]   = []
 
 def get_contact_person(repo: Repository) -> str:
