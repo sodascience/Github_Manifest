@@ -47,18 +47,18 @@ def get_contact_person(repo: Repository) -> str:
     if last_contact_position == -1:
         return "Contact section not found"
 
-        contact_content = content[last_contact_position:]
-        contact_link_regexp = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
-        contact_email_regexp = r'\[[^\]]+\]\(mailto:([^\)]+)\)'
+    contact_content = content[last_contact_position:]
+    contact_link_regexp = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
+    contact_email_regexp = r'\[[^\]]+\]\(mailto:([^\)]+)\)'
 
-        links = re.findall(contact_link_regexp, contact_content)
-        emails = re.findall(contact_email_regexp, contact_content)
-        
-        links_strings = [f"[{name.replace(chr(10), ' ').strip()}]({url})" for name, url in links]
-        contact_persons = links_strings + emails
+    links = re.findall(contact_link_regexp, contact_content)
+    emails = re.findall(contact_email_regexp, contact_content)
+    
+    links_strings = [f"[{name.replace(chr(10), ' ').strip()}]({url})" for name, url in links]
+    contact_persons = links_strings + emails
 
-        if contact_persons:
-            return ", ".join(contact_persons)
+    if contact_persons:
+        return ", ".join(contact_persons)
     
     # Edge case when contact section exists but no contacts detected by the regex,
     # might have information about institution collaboration (e.g. websweep: https://github.com/sodascience/websweep)
@@ -97,7 +97,7 @@ def create_markdown_report():
     """
     issues_table_rows = []
     for i in inactive_issues:
-        repo_link = f"[{i.repository.full_name.split('/')[-1]}]({i.repository_url})" if i.repository_url is not None else "Unknown Repo Link"
+        repo_link = f"[{i.repository.full_name.split('/')[-1]}]({i.repository.html_url})" if i.repository is not None else "Unknown Repo Link"
         issue_link = f"[{i.title}]({i.html_url})" if i.html_url is not None else "Unknown Issue Link"
         inactive_since = i.updated_at.strftime("%Y-%m-%d") if i.updated_at is not None else "Unknown Last Updated Date"
         assignees_str = get_assignees_string(i)
