@@ -24,7 +24,7 @@ Your research project, including code, data and documentation, is stored in what
 ### How to start?
 When you're starting a new project, there are a couple of scenarios:
 1. You are starting a new and blank project.
-2. Somebody else has started the project already and pushed it to Github.
+2. Somebody else has started the project, hosted its remote repository on GitHub, and shared it with you.
 3. You have started the project on your device but haven't pushed it to Github.
 
 This is how to proceed depending on the scenario
