@@ -6,6 +6,8 @@ The reason this workflow is important is because it allows you to share your wor
 
 Git is the application that powers services such as Github and Gitlab. It is essential for sharing and storing code. For the rest of this tutorial you will need to have a working installation of git which can be downloaded [here](https://git-scm.com/). If you have downloaded and installed this we can get started. Do quickly verify whether git was installed correctly by typing `git --version` in the _command line interface_ (CLI) of your operating system. For MacOS, this would be terminal; for Windows, it's called command prompt. Then, press the Enter key on your keyboard. If Git was installed correctly you should get a response like "Git version 2.49.0"
 
+NOTE: Installing Git by itself is not necessary if you want to work with Github Desktop (which is recommended) as it also installs Git automatically.
+
 
 ## 2. Downloading Github Desktop
 
