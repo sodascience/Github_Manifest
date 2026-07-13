@@ -74,11 +74,13 @@ The most basic flow is as follows
 6. You are done.
 
 This of course leaves a couple of questions unanswered, namely:
-1. I need names for these commits and branches, what do I call them?
-2. What is a smaller change and can be a commit and what needs its own branch? 
-3. How do I do a PR?
+1. I need summary and description for these commits, what do I put there?
+2. What do I name my branches?
+3. What is a smaller change and can be a commit and what needs its own branch? 
+4. How do I do a PR?
 
 Which we answer below:
-1. It often helps to give them appropriate names. For example if you've added an extra feature be that analysis or an extra button. Now you would like to indicate that this commit/branch added an extra feature. However if you just fixed an existing problem you want the name to clearly convey that as well. This is why best practices have been developed which can be found in the Github guidelines file.
+1. It often helps to describe clearly what you've done. Start off with "fix:" for example when correcting a typo. If this was in a readme the summary would then read "fix: correct typo in readme". There are different ways to start the summary depending on what type of task you did. An overview can be found in the guidelines. The description is useful when you did something complex as it gives the opportunity to explain why you made certain choices in your new version.
+2. This depends on the purpose of the branch. If you are adding an extra feature you would want to call it something else compared to when you do a bugfix. The exact naming conventions can be found in the guidelines document.
 2. This is a question even seasoned developers struggle with. General advice here would be that once you start working on some change (feature/fix/chore anything really), and you are working on that branch, to only have commits that are in direct service to that change. If it is something that you encounter which is not directly linked, but you want to fix it, it is probably best to first finish the existing change and then move on to that task. This helps keep branches focussed.
 3. If you or a collaborator has made changes on a branch you can start a PR on Github by going to "pull requests" and then clicking on "New pull request". In an ideal scenario no other changes have been made since you started working on a branch and you have people that are also working on the project. These people can then review the changes you've made and give an honest assessment of the quality of the code. In the case that other changes have been made you probably have merge conflicts. In this case you first need to merge main into your branch and resolve conflicts locally after which you can merge still. If there is no one to review your PR you must do this yourself. In this case be honest about the quality of the code and whether there are still improvements that need to be made before it can be merged to main.
