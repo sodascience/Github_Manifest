@@ -18,8 +18,10 @@ It is of course also possible to use the more traditional command-line interface
 
 ## 3. Creating a new repository
 
-Your research project, including code, data and documentation, is stored in what's called a repository. It is important to note here that you will have a local repository and a remote repository. The remote one is the one that is hosted on Github and the local one only exists on your device. If you have made any changes to the project  on your device, these are now part of your local repository and by "pushing" these to the remote repository, you can update the remote repository. This way, you can share your repository with other collaborators, allowing them to not only view but also contribute to your repository. Once a collaborator has made changes to the shared project and "pushed" these from their local version of the repository, you can review, comment on, accept/reject them, and even ask for revisions. If you are happy with these changes, you can "merge" them into the remote shared repository. Then, you can "pull" these changes so that your local repository reflects the up-to-date version. 
+### What is a repository?
+Your research project, including code, data and documentation, is stored in what's called a repository. It is important to note here that you will have a local repository and a remote repository. The remote one is the one that is hosted on Github and the local one only exists on your device. If you have made any changes to the project  on your device, these are now part of your local repository and by "pushing" these to the remote repository, you can update the remote repository. Now others can acces the updated code as well. They can "pull" these changes so that their local repository reflects the up-to-date version and the reverse also applies if other collaborators make changes. 
 
+### How to start?
 When you're starting a new project, there are a couple of scenarios:
 1. You are starting a new and blank project.
 2. Somebody else has started the project already and pushed it to Github.
@@ -27,17 +29,38 @@ When you're starting a new project, there are a couple of scenarios:
 
 This is how to proceed depending on the scenario
 
-1. In this case you can simply click "Create a New Repository" in Github Desktop.
+1. In this case you can simply click "Create a New Repository" in Github Desktop. If you are doing a general data analysis project we recommend you use our [template](https://github.com/sodascience/research-project-boilerplate).
 2. In this case you have to "clone" that repository. This just means setting up the local repository based on the remote repository. If you go to the homepage of that repository on Github there should be a green button which displays a link when clicked. You should copy this link. Then you can go to Github desktop and click clone repository and paste the link. After that Github Desktop takes care of the rest of the setup.
 3. In this case you can click on "Add Local Repository" after which you will have to select the folder containing your current version of the project. If this already happened to contain a .git file the rest happens automatically, if it didn't you simply click "create a repository here instead"
 
 NOTE: Pushing to github does not necessarily publish your code so that it is visible for everyone to see. You can set your repository to private if you want to have control over who sees your code/data.
 
 ## 4. Making changes
-When making changes it is important to understand two concepts, commits and branches. Let's say you have made a certain change to some code. The project is now different. What you then do is save the new version of the project by "committing" it. You can see the changes in Github Desktop and see the commit button down below with the option to add message to the new version. Once committed it is saved. You can then also "push" it so the new version is available for possible collaborators on Github. Branches much like those attached to a tree can run in parallel. Here that means that you keep multiple versions (branches) of the same project which you can edit separately. When working with other people you can each work on your own version (branch) of the project without interfering with each other's work. You can also recombine these branches if you want to merge the separate changes you and your collaborator made. You can create a new branch by clicking on "current branch" and then clicking "new branch".
+When making changes it is important to understand two concepts, the first being <em>commits</em>. Let's say you have made a certain change to some code. The project is now different. What you then do is save the new version of the project by "committing" it. Over time the history then looks as follows:
+
+<img src="images/basicCommits.png" width="400">
+
+Of course just numbering the versions doesn't convey a lot of information. Probably we should give our versions more useful names such as:
+
+<img src="images/betterNamesCommits.png" width="400">
+
+When you want to commit you can see the changes in Github Desktop and see the commit button down below with the option to add a message to the new version. Once committed it is saved. You can then also "push" it so the new version is available for possible collaborators on Github. 
+
 ![Changes](/images/changes.png)
 
-## 5. What does this like like in practice?
+The second concept is <em>branches</em>. Branches are a way to keep two (temporarily) distinct versions of the project.What we have seen with commits so far has been on a single branch. Multiple branches looks as follows: 
+
+<img src="images/basicbranch.png" width="400">
+
+
+ When working with other people you can each work on your own version (branch) of the project without interfering with each other's work. You can create a new branch by clicking on "current branch" and then clicking "new branch". You can also recombine these branches if you want to merge the separate changes you and your collaborator made. This is done through a PR (Pull Request) which graphically looks as follows: 
+
+ <img src="images/pullRequest.png" width="500">
+
+ You can create a PR by going to your repository on github, clicking "Pull requests", and then "New pull request"
+
+
+## 5. How/when do I do this committing and branching?
 
 ### The flow
 The most basic flow is as follows
