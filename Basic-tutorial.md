@@ -31,6 +31,8 @@ This is how to proceed depending on the scenario
 
 1. In this case you can simply click "Create a New Repository" in Github Desktop. If you are doing a general data analysis project we recommend you use our [template](https://github.com/sodascience/research-project-boilerplate).
 2. In this case you have to "clone" that repository. This just means setting up the local repository based on the remote repository. If you go to the homepage of that repository on Github there should be a green button which displays a link when clicked. You should copy this link. Then you can go to Github desktop and click clone repository and paste the link. After that Github Desktop takes care of the rest of the setup.
+<img src="images/cloneImage.png" width="400">
+
 3. In this case you can click on "Add Local Repository" after which you will have to select the folder containing your current version of the project. If this already happened to contain a .git file the rest happens automatically, if it didn't you simply click "create a repository here instead"
 
 NOTE: Pushing to github does not necessarily publish your code so that it is visible for everyone to see. You can set your repository to private if you want to have control over who sees your code/data.
