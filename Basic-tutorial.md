@@ -7,6 +7,9 @@ Git is the application that powers services such as Github and Gitlab. It is ess
 
 This application provides a nice visual interface for interacting with Github. It is highly recommended for beginners as it means you don't have to use the command line. It can be downloaded [here](https://desktop.github.com/download/). After installation it is important that you authenticate yourself. This can be done by going into settings, then accounts, and then signing into Github. If you do not have a github account yet please create one.
 
+After that you should see something like this:
+![Github desktop homescreen](/images/homescreen.png)
+
 It is of course also possible to use the more traditional command-line interface. We recommend a visual interface for people who are unfamiliar with Git and just starting out. Should you nonetheless want to use CLI instead we recommend the following resource: [Git CLI tutorial](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line)
 
 ## 3. Creating a new repository
@@ -20,7 +23,7 @@ When you're starting a new project, there are a couple of scenarios:
 
 This is how to proceed depending on the scenario
 
-1. In this case you can simply click "New Repository" in Github Desktop.
+1. In this case you can simply click "Create a New Repository" in Github Desktop.
 2. In this case you have to "clone" that repository. This just means setting up the local repository based on the remote repository. If you go to the homepage of that repository on Github there should be a green button which displays a link when clicked. You should copy this link. Then you can go to Github desktop and click clone repository and paste the link. After that Github Desktop takes care of the rest of the setup.
 3. In this case you can click on "Add Local Repository" after which you will have to select the folder containing your current version of the project. If this already happened to contain a .git file the rest happens automatically, if it didn't you simply click "create a repository here instead"
 
@@ -28,6 +31,7 @@ NOTE: Pushing to github does not necessarily publish your code so that it is vis
 
 ## 4. Making changes
 When making changes it is important to understand two concepts, commits and branches. Let's say you have made a certain change to some code. The project is now different. What you then do is save the new version of the project by "committing" it. You can see the changes in Github Desktop and see the commit button down below with the option to add message to the new version. Once committed it is saved. You can then also "push" it so the new version is available for possible collaborators on Github. Branches much like those attached to a tree can run in parallel. Here that means that you keep multiple versions (branches) of the same project which you can edit separately. When working with other people you can each work on your own version (branch) of the project without interfering with each other's work. You can also recombine these branches if you want to merge the separate changes you and your collaborator made. You can create a new branch by clicking on "current branch" and then clicking "new branch".
+![Changes](/images/changes.png)
 
 ## 5. When and why do I even do all of this?
 ### The why
