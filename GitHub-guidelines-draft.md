@@ -53,7 +53,6 @@ my-package/
 ├── README.md
 └── pyproject.toml
 ```
-TODO: INSTRUCTION TO CREATE DIFFERENT TYPES OF PROJECT
 
 ### Research / Analysis Project
 
@@ -77,6 +76,8 @@ my-research-project/
 ```
 
 ---
+
+NOTE: For this type of project we have a template which follows the recommended project structure and makes the setup a bit easier. It can be found [here](https://github.com/sodascience/research-project-boilerplate).
 
 ## 3. Branching Strategy
 
@@ -267,11 +268,13 @@ Periodically (every few months) review all open issues and close those that are 
 
 ## 7. Recommendations for new repositories
 
+### Topics
+When on the homepage of your repository you can click on the settings icon in the about section to add topics to a repository. This is useful as people can easily find out what your project is about. For example if you are using an LLM to analyze CBS data in Python you would use the "cbs" "llm" and "python" tags. Please add these as it makes the purpose of a repository much more clear. Standard convention here is to use lowercase and only to use abbreviations when the abbreviation is generally used more than the full version.
 ### Tests
 
-TODO: Expand this section.
+When developing a tool that others will hopefully use someday it is important to make sure it works as intended. Therefore testing your code to verify this is the case is very useful. It has the additional benefit of being an automatic check whether or not a new change breaks some existing core functionality.
 
-It is important for all new repositories to have tests that are executed by CI and test the functionality of the code every time there is a PR to the 'main' branch. 
+Thus, it is important for all new repositories to have tests that are executed by CI and test the functionality of the code every time there is a PR to the 'main' branch wherever reasonable. If the project is mostly data analysis or is not intended to be reusable this may not apply. This is however a case of author discretion.
 
 Structure of the `tests` directory:
 
